@@ -1,0 +1,33 @@
+# management.endpoint.web.exposure.include=*
+spring:
+  application:
+    name: ecom-micro-order
+  datasource:
+    url: jdbc:mysql://localhost:3307/ecom_micro
+    username: ecom_micro
+    password: ecom_micro
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 8002
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+app:
+  message: "Hallo Order"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8085/eureka/
+    register-with-eureka: true
+    fetch-registry: true

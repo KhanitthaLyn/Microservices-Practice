@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: consumer
+server:
+  port: 1111
+provider:
+  url: http://localhost:2222
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1000/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+#management:
+#  endpoint:
+#    shutdown:
+#      enabled: true
+#  endpoints:
+#    web:
+#      exposure:
+#        include: shutdown
