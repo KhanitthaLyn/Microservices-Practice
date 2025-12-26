@@ -1,6 +1,10 @@
 package com.micro.order.services;
 
+import com.micro.order.clients.ProductServiceClient;
+import com.micro.order.clients.UserServiceClient;
 import com.micro.order.dto.CartItemRequest;
+import com.micro.order.dto.ProductResponse;
+import com.micro.order.dto.UserResponse;
 import com.micro.order.models.CartItem;
 import com.micro.order.repository.CartItemRepository;
 import jakarta.transaction.Transactional;
@@ -16,37 +20,34 @@ import java.util.Optional;
 @Transactional
 public class CartService {
     private final CartItemRepository cartItemRepository;
+    private final ProductServiceClient productServiceClient;
+    private final UserServiceClient userServiceClient;
 
     public boolean addToCart(String userId, CartItemRequest request) {
-//       Optional<Product> productOpt = productRepository.findById(request.getProductId());
-//       if (productOpt.isEmpty())
-//           return false;
-//
-//           Product product = productOpt.get();
-//           if (product.getQuantity() < request.getQuantity())
-//               return false;
-//
-//               Optional<User> userOpt = userRepository.findById(Long.valueOf(userId));
-//               if (userOpt.isEmpty())
-//                   return false;
-//
-//                   User user = userOpt.get();
+       ProductResponse productResponse = productServiceClient.getProductDetails(request.getProductId());
+       if (productResponse == null || productResponse.getQuantity() < request.getQuantity())
+           return false;
 
-                   CartItem existingCartItem = cartItemRepository.findByUserIdAndProductId(userId, request.getProductId());
-                   if (existingCartItem != null) {
-                       existingCartItem.setQuantity(existingCartItem.getQuantity() + request.getQuantity());
-                       existingCartItem.setPrice(BigDecimal.valueOf(1000.00));
-                       cartItemRepository.save(existingCartItem);
-                   } else  {
-                       CartItem cartItem = new CartItem();
-                       cartItem.setUserId(userId);
-                       cartItem.setProductId(request.getProductId());
-                       cartItem.setQuantity(request.getQuantity());
-                       cartItem.setPrice(BigDecimal.valueOf(1000.00));
-                       cartItemRepository.save(cartItem);
-                   }
-                   return  true;
-               }
+       UserResponse userResponse = userServiceClient.getUserDetails(userId);
+       if (userResponse == null)
+           return false;
+
+
+        CartItem existingCartItem = cartItemRepository.findByUserIdAndProductId(userId, request.getProductId());
+        if (existingCartItem != null) {
+            existingCartItem.setQuantity(existingCartItem.getQuantity() + request.getQuantity());
+            existingCartItem.setPrice(BigDecimal.valueOf(1000.00));
+            cartItemRepository.save(existingCartItem);
+        } else  {
+            CartItem cartItem = new CartItem();
+            cartItem.setUserId(userId);
+            cartItem.setProductId(request.getProductId());
+            cartItem.setQuantity(request.getQuantity());
+            cartItem.setPrice(BigDecimal.valueOf(1000.00));
+            cartItemRepository.save(cartItem);
+        }
+        return  true;
+    }
 
     public boolean deleteItemFromCart(String userId, String productId) {
        CartItem cartItem = cartItemRepository.findByUserIdAndProductId(userId, productId);
