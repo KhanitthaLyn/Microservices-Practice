@@ -40,12 +40,40 @@ server:
 #    org.springframework.cloud.gateway.route.RouteDefinitionLocator: INFO
 #    org.springframework.cloud.gateway: TRACE
 
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: "*"
-    tracing:
-      sampling:
-        probability: 1.0
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
 
+# Circuit Breaker
+resilience4j:
+  circuitbreaker:
+    instances:
+      ecomBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        slidingWindowType: count_based
+
+
+# SECURITY
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+#          issuer-uri: http://keycloak:8001/realms/ecom-micro
