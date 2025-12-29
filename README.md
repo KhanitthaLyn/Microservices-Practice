@@ -5,53 +5,93 @@
 
 
 
-## Project Status
-**In progress (~10–20%)**
+# 🛒 E-Commerce Microservices (Spring Boot 3)
 
-## Goal
-Practice migrating a monolithic e-commerce backend to a **Spring Boot 3 microservices architecture** with clear service boundaries and independent data ownership (database-per-service).
+🚧 **Project Status:** In progress (~10–20%)
 
-## Current Implemented
-- **Services:** `user-service`, `product-service`, `order-service`
-- **Communication:** REST (service-to-service calls)
-- **Databases (per service):**
-  - `user-service` → **MongoDB**
-  - `product-service` → **PostgreSQL**
-  - `order-service` → **MySQL**
-
-## Working Key Flow (Current)
-- Basic end-to-end flow across services (User → Product → Order) running locally.
-
-## How to Run (Local)
-- Start dependencies with **Docker Compose**
-- Run each Spring Boot service locally
-
-## Roadmap (Later)
-- Event-driven communication with **Kafka**
-- Authentication/authorization with **Keycloak (OAuth2)**
-- Observability (tracing/metrics/logging)
-- Deployment to **Kubernetes**
-
+This repository is a learning + implementation playground for migrating a **monolithic e-commerce backend** into a **Spring Boot 3 microservices architecture** with clear service boundaries and **database-per-service** ownership.
 
 ---
 
-🚀 Microservices Architecture Overview
+## 🎯 Goal
 
-This project demonstrates a simple microservices architecture consisting of three independent services:
+Build a practical microservices foundation with:
 
-👤 User Service 
+- Clear service boundaries (User / Product / Order)
+- Independent deployment per service
+- **Database-per-service** (separated data ownership)
+- REST communication now → event-driven later
 
-📦 Product Service 
+---
 
-🛒 Order Service 
+## ✅ Current Implementation
 
-Each service runs on its own port and maintains its own dedicated database, following key microservices principles:
+### Services
+- 👤 **user-service**
+- 📦 **product-service**
+- 🛒 **order-service**
 
-🔗 Loose coupling
+### Communication
+- 🔁 **REST** (service-to-service calls)
 
-🚀 Independent deployment
+### Databases (per service)
+- **user-service** → MongoDB  
+- **product-service** → PostgreSQL  
+- **order-service** → MySQL  
 
-🗃️ Separated data ownership
+### Working Key Flow (Current)
+- ✅ Basic end-to-end flow across services (**User → Product → Order**) running locally
+
+---
+
+## 🚀 Microservices Architecture Overview
+
+A simple microservices architecture consisting of three independent services.
+
+Each service:
+- runs on its own port
+- owns its own database
+- can be deployed independently
+
+Core principles applied:
+- 🔗 Loose coupling  
+- 🚀 Independent deployment  
+- 🗃️ Separated data ownership  
+- 📈 Scalable & maintainable architecture  
+
+---
+
+## 🧠 What I’m Currently Exploring / Implementing
+
+This repo is actively expanding toward a more complete Spring Cloud ecosystem.
+
+### Spring Cloud Foundations
+- ✅ Spring Boot Actuator (health/info/metrics)
+- ⏳ Spring Cloud Gateway (API Gateway)
+- ⏳ Config Server (centralized configuration management)
+- ⏳ Eureka Server (service registry & discovery)
+
+### Inter-service Communication
+- ✅ REST-based calls (current)
+- ⏳ OpenFeign / RestTemplate (improving client patterns)
+
+### Observability & Resilience
+- ⏳ Distributed tracing with Zipkin
+- ⏳ Resilience patterns with Resilience4J (retry/circuit breaker/timeouts)
+
+### Security
+- ⏳ JWT-based security (service-level)
+- ⏳ OAuth2 + Keycloak (central authentication/authorization)
+
+### Event-Driven (Later Stage)
+- ⏳ Apache Kafka
+- ⏳ Spring Cloud Stream
+
+### Deployment (Later Stage)
+- ✅ Containerize with Docker (in progress)
+- ⏳ Deploy to Kubernetes (K8s)
+
+---
 
 📈 Scalable and maintainable architecture
 
