@@ -19,11 +19,11 @@ spring:
   #            producer:
   #              routing-key-expression: '''order.tracking'''
     rabbitmq:
-      host: localhost
-      port: 5672
-      username: guest
-      password: guest
-      virtual-host: ${RABBITMQ_VHOST:guest}
+      host: cloudamqp
+      port: cloudamqp
+      username: cloudamqp
+      password: cloudamqp
+      virtual-host: cloudamqp
       connection-timeout: 30000
   jpa:
     database: MYSQL
@@ -35,13 +35,13 @@ spring:
 server:
   port: 8002
 
-#rabbitmq:
-#  exchange:
-#    name: order.exchange
-#  queue:
-#    name: order.queue
-#  routing:
-#    key: order.tracking
+rabbitmq:
+  exchange:
+    name: order.exchange
+  queue:
+    name: order.queue
+  routing:
+    key: order.tracking
 
 management:
   endpoints:
