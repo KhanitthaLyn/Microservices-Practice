@@ -6,7 +6,8 @@ import com.micro.order.dto.OrderResponse;
 import com.micro.order.models.*;
 import com.micro.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+//import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -20,7 +21,8 @@ import java.util.stream.Collectors;
 public class OrderService {
     private final CartService cartService;
     private final OrderRepository orderRepository;
-    private final RabbitTemplate rabbitTemplate;
+//    private final RabbitTemplate rabbitTemplate;
+    private final StreamBridge streamBridge;
 
 
     public Optional<OrderResponse> createOrder(String userId) {
