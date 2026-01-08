@@ -93,5 +93,4 @@ This repo is actively expanding toward a more complete Spring Cloud ecosystem.
 
 ---
 
-📈 Scalable and maintainable architecture
 
